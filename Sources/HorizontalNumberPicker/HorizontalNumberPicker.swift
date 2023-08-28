@@ -93,6 +93,12 @@ public struct HorizontalPickerView: View {
         return Int(doubleValue)
     }
     
+    public init(offset: Binding<CGFloat>, minValue: Int, maxValue: Int) {
+        self._offset = offset
+        self.minValue = minValue
+        self.maxValue = maxValue
+    }
+    
     public var body: some View {
         HorizontalPickerUIKitView(pickerCount: pickerCount, offset: $offset) {
             HStack(spacing: 0) {
