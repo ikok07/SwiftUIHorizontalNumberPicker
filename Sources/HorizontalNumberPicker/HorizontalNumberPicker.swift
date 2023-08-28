@@ -23,7 +23,7 @@ struct HorizontalPickerUIKitView<Content: View>: UIViewRepresentable {
         return HorizontalPickerUIKitView.Coordinator(parent: self)
     }
     
-    func makeUIView(context: Context) -> some UIScrollView {
+    public func makeUIView(context: Context) -> some UIScrollView {
         
         let scrollView = UIScrollView()
         
@@ -82,7 +82,7 @@ struct HorizontalPickerUIKitView<Content: View>: UIViewRepresentable {
 }
 
 @available(iOS 15.0, *)
-struct HorizontalPickerView: View {
+public struct HorizontalPickerView: View {
     
     @Binding var offset: CGFloat
     
@@ -93,8 +93,7 @@ struct HorizontalPickerView: View {
         return Int(doubleValue)
     }
     
-    
-    var body: some View {
+    public var body: some View {
         HorizontalPickerUIKitView(pickerCount: pickerCount, offset: $offset) {
             HStack(spacing: 0) {
                 
