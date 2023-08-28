@@ -86,9 +86,9 @@ public struct HorizontalPickerView: View {
     
     @Binding var offset: CGFloat
     
-    let minValue: Int
-    let maxValue: Int
-    var pickerCount: Int {
+    public let minValue: Int
+    public let maxValue: Int
+    public var pickerCount: Int {
         let doubleValue: Double = ceil((Double(maxValue) - Double(minValue) - 1.0) / 5.0)
         return Int(doubleValue)
     }
