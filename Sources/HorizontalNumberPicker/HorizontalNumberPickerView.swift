@@ -5,17 +5,19 @@ import SwiftUI
 @available(iOS 15.0, *)
 public struct HorizontalPickerView: View {
     
-    @Binding var offset: CGFloat
+    @State private var offset: CGFloat
+    @Binding var value: CGFloat
     
     public let minValue: Int
     public let maxValue: Int
-    public var pickerCount: Int {
+    private var pickerCount: Int {
         let doubleValue: Double = ceil((Double(maxValue) - Double(minValue) - 1.0) / 5.0)
         return Int(doubleValue)
     }
     
-    public init(offset: Binding<CGFloat>, minValue: Int, maxValue: Int) {
-        self._offset = offset
+    public init(value: Binding<CGFloat>, minValue: Int, maxValue: Int) {
+        self.offset = 0
+        self._value = value
         self.minValue = minValue
         self.maxValue = maxValue
     }
@@ -54,6 +56,11 @@ public struct HorizontalPickerView: View {
                 .fill(.gray)
                 .frame(width: 1, height: 50)
                 .offset(x: 1, y: -30)
+        }
+        .onAppear {
+            let progress = offset / 20
+            
+            self.value = CGFloat(minValue) + progress
         }
     }
 }
