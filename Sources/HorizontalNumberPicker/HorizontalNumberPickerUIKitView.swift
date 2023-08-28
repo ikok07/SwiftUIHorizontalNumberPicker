@@ -6,7 +6,7 @@ import Foundation
 import SwiftUI
 
 
-@available(iOS 15.0, *)
+@available(iOS 17.0, *)
 struct HorizontalPickerUIKitView<Content: View>: UIViewRepresentable {
     
     var content: Content
