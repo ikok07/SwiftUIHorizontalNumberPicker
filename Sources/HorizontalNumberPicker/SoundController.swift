@@ -13,7 +13,7 @@ struct Sound {
     class CustomBundle {}
     
     static func play() {
-        let url = Bundle(for: CustomBundle.self).url(forResource: "click", withExtension: "wav")!
+        let url = Bundle(for: CustomBundle.self).url(forResource: "click", withExtension: "wav", subdirectory: "Sounds")!
         
         do {
             let player = try AVAudioPlayer(contentsOf: url)
