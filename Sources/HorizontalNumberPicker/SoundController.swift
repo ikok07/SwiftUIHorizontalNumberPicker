@@ -11,7 +11,7 @@ import AVFoundation
 struct Sound {
     
     static func play() {
-        let url = Bundle.main.url(forResource: "click", withExtension: "wav")!
+        let url = Bundle.module.url(forResource: "click", withExtension: "wav")!
         
         do {
             let player = try AVAudioPlayer(contentsOf: url)
