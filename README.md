@@ -11,10 +11,7 @@ Here is an example from my project:
 
 1. You can download the package from the built in package manager tool in xcode using this link `https://github.com/ikok07/SwiftUIHorizontalNumberPicker.git`
 
-2. Import the package into your swift files. 
-'''swift
-import HorizontalNumberPicker
-'''
+2. Import the package into your swift file.
 # Usage
 
 1. Add variables
