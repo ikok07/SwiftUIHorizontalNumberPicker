@@ -56,6 +56,7 @@ struct HorizontalPickerUIKitView<Content: View>: UIViewRepresentable {
         
         func scrollViewDidScroll(_ scrollView: UIScrollView) {
             parent.offset = scrollView.contentOffset.x
+            print(parent.offset)
         }
         
         func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
