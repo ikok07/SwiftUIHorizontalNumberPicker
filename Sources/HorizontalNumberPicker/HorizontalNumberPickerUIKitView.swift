@@ -57,8 +57,7 @@ struct HorizontalPickerUIKitView<Content: View>: UIViewRepresentable {
         func scrollViewDidScroll(_ scrollView: UIScrollView) {
             parent.offset = scrollView.contentOffset.x
             if parent.offset.truncatingRemainder(dividingBy: 20) == 0 {
-                Sound.play()
-                print(parent.offset)
+                // play click sound
             }
             
         }
