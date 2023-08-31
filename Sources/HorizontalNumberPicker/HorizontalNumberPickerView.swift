@@ -77,5 +77,6 @@ public struct HorizontalPickerView: View {
             
             self.value = Int(CGFloat(minValue) + progress)
         }
+        .sensoryFeedback(.selection, trigger: value)
     }
 }
