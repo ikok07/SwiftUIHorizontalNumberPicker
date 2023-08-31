@@ -63,7 +63,7 @@ public struct HorizontalPickerView: View {
                 Rectangle()
                     .fill(selectorGradient)
                     .frame(width: 3, height: 30)
-                    .offset(x: 1, y: 30)
+                    .offset(x: 1)
                 
                 Triangle()
                     .fill(selectorGradient)
