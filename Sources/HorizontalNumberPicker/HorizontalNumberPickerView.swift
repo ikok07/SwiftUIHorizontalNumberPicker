@@ -81,7 +81,7 @@ public struct HorizontalPickerView: View {
                 self.value = Int(CGFloat(minValue) + progress)
             }
             .onAppear {
-                DispatchQueue.main.async {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     offset = CGFloat(20 * (startValue - minValue))
                     let progress = offset / 20
                     
