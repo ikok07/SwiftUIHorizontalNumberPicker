@@ -27,64 +27,75 @@ public struct HorizontalPickerView: View {
     }
     
     public var body: some View {
-        HorizontalPickerUIKitView(pickerCount: pickerCount, offset: $offset, minValue: self.minValue, startValue: self.startValue) {
-            HStack(spacing: 0) {
-                
-                ForEach(1...pickerCount, id: \.self) { index in
+        VStack {
+            Text("\(value)")
+            HorizontalPickerUIKitView(pickerCount: pickerCount, offset: $offset, minValue: self.minValue, startValue: self.startValue) {
+                HStack(spacing: 0) {
+                    
+                    ForEach(1...pickerCount, id: \.self) { index in
+                        Rectangle()
+                            .fill(.gray)
+                            .frame(width: 1, height: 30)
+                            .frame(width: 20)
+                        
+                        ForEach(1...4, id: \.self) { subIndex in
+                            Rectangle()
+                                .fill(.gray)
+                                .frame(width: 1, height: 15)
+                                .frame(width: 20)
+                        }
+                    }
+                    
                     Rectangle()
                         .fill(.gray)
                         .frame(width: 1, height: 30)
+                        .clipShape(RoundedRectangle(cornerRadius: 3))
                         .frame(width: 20)
                     
-                    ForEach(1...4, id: \.self) { subIndex in
-                        Rectangle()
-                            .fill(.gray)
-                            .frame(width: 1, height: 15)
-                            .frame(width: 20)
-                    }
                 }
-                
-                Rectangle()
-                    .fill(.gray)
-                    .frame(width: 1, height: 30)
-                    .clipShape(RoundedRectangle(cornerRadius: 3))
-                    .frame(width: 20)
-                
+                .offset(x: UIScreen.main.bounds.width / 2)
+                .padding(.trailing, UIScreen.main.bounds.width)
             }
-            .offset(x: (UIScreen.main.bounds.width - 30) / 2)
-            .padding(.trailing, UIScreen.main.bounds.width - 30)
-        }
-        .frame(height: 50)
-        .overlay {
-                Triangle()
-                    .fill(selectorGradient)
-                    .frame(width: 15, height: 15)
-                    .rotationEffect(.degrees(180))
-                    .offset(x: 1, y: -30)
-                
-                Rectangle()
-                    .fill(selectorGradient)
-                    .frame(width: 3, height: 30)
-                    .offset(x: 1)
-                
-                Triangle()
-                    .fill(selectorGradient)
-                    .frame(width: 15, height: 15)
-                    .offset(x: 1, y: 30)
+            .frame(height: 50)
+            .overlay {
+                    Triangle()
+                        .fill(selectorGradient)
+                        .frame(width: 15, height: 15)
+                        .rotationEffect(.degrees(180))
+                        .offset(x: 1, y: -30)
+                    
+                    Rectangle()
+                        .fill(selectorGradient)
+                        .frame(width: 3, height: 30)
+                        .offset(x: 1)
+                    
+                    Triangle()
+                        .fill(selectorGradient)
+                        .frame(width: 15, height: 15)
+                        .offset(x: 1, y: 30)
 
+                    
+            }
+            .onChange(of: self.offset) { oldValue, newValue in
+                let progress = offset / 20
                 
+                self.value = Int(CGFloat(minValue) + progress)
+            }
+            .onAppear {
+                offset = CGFloat(20 * (startValue - minValue))
+                let progress = offset / 20
+                
+                self.value = Int(CGFloat(minValue) + progress)
+            }
+            .padding()
+            .sensoryFeedback(.selection, trigger: value)
         }
-        .onChange(of: self.offset) { oldValue, newValue in
-            let progress = offset / 20
-            
-            self.value = Int(CGFloat(minValue) + progress)
-        }
-        .onAppear {
-            offset = CGFloat(20 * (startValue - minValue))
-            let progress = offset / 20
-            
-            self.value = Int(CGFloat(minValue) + progress)
-        }
-        .sensoryFeedback(.selection, trigger: value)
+    }
+}
+
+@available(iOS 17.0.0, *)
+struct Preview: PreviewProvider {
+    static var previews: some View {
+        HorizontalPickerView(value: .constant(20), minValue: 20, maxValue: 180, startValue: 20)
     }
 }
