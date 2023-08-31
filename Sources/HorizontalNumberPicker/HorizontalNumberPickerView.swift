@@ -12,20 +12,22 @@ public struct HorizontalPickerView: View {
     
     public let minValue: Int
     public let maxValue: Int
+    public let startValue: Int
     private var pickerCount: Int {
         let doubleValue: Double = ceil((Double(maxValue) - Double(minValue) - 1.0) / 5.0)
         return Int(doubleValue)
     }
     
-    public init(value: Binding<Int>, selectorGradient: LinearGradient = LinearGradient(colors: [.gray], startPoint: .leading, endPoint: .trailing), minValue: Int, maxValue: Int) {
+    public init(value: Binding<Int>, selectorGradient: LinearGradient = LinearGradient(colors: [.gray], startPoint: .leading, endPoint: .trailing), minValue: Int, maxValue: Int, startValue: Int) {
         self._value = value
         self.selectorGradient = selectorGradient
         self.minValue = minValue
         self.maxValue = maxValue
+        self.startValue = startValue
     }
     
     public var body: some View {
-        HorizontalPickerUIKitView(pickerCount: pickerCount, offset: $offset) {
+        HorizontalPickerUIKitView(pickerCount: pickerCount, offset: $offset, minValue: self.minValue, startValue: self.startValue) {
             HStack(spacing: 0) {
                 
                 ForEach(1...pickerCount, id: \.self) { index in
@@ -76,6 +78,9 @@ public struct HorizontalPickerView: View {
             let progress = offset / 20
             
             self.value = Int(CGFloat(minValue) + progress)
+        }
+        .onAppear {
+            offset = CGFloat(startValue - minValue)
         }
         .sensoryFeedback(.selection, trigger: value)
     }

@@ -9,13 +9,18 @@ import SwiftUI
 @available(iOS 17.0, *)
 struct HorizontalPickerUIKitView<Content: View>: UIViewRepresentable {
     
-    var content: Content
     @Binding var offset: CGFloat
-    var pickerCount: Int
     
-    init(pickerCount: Int, offset: Binding<CGFloat>, @ViewBuilder content: @escaping () -> Content) {
+    var content: Content
+    var pickerCount: Int
+    var minValue: Int
+    var startValue: Int
+    
+    init(pickerCount: Int, offset: Binding<CGFloat>, minValue: Int, startValue: Int, @ViewBuilder content: @escaping () -> Content) {
         self.pickerCount = pickerCount
         self.content = content()
+        self.minValue = minValue
+        self.startValue = startValue
         self._offset = offset
     }
     
@@ -38,6 +43,8 @@ struct HorizontalPickerUIKitView<Content: View>: UIViewRepresentable {
         scrollView.bounces = false
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.delegate = context.coordinator
+        scrollView.contentOffset.x = CGFloat(startValue - minValue)
+        
         return scrollView
         
     }
