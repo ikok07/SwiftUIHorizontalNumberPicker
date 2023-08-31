@@ -28,7 +28,6 @@ public struct HorizontalPickerView: View {
     
     public var body: some View {
         VStack {
-            Text("\(value)")
             HorizontalPickerUIKitView(pickerCount: pickerCount, offset: $offset, minValue: self.minValue, startValue: self.startValue) {
                 HStack(spacing: 0) {
                     
