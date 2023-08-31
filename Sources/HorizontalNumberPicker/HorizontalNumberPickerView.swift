@@ -55,20 +55,22 @@ public struct HorizontalPickerView: View {
         .frame(height: 50)
         .overlay {
             
-            Triangle()
-                .fill(selectorGradient)
-                .frame(width: 15, height: 15)
-                .rotationEffect(.degrees(180))
-                .offset(x: 1, y: -30)
-            
-            Rectangle()
-                .fill(selectorGradient)
-                .frame(width: 2, height: 30)
-            
-            Triangle()
-                .fill(selectorGradient)
-                .frame(width: 15, height: 15)
-                .offset(x: 1, y: 30)
+            VStack(alignment: .center) {
+                Triangle()
+                    .fill(selectorGradient)
+                    .frame(width: 15, height: 15)
+                    .rotationEffect(.degrees(180))
+                    .offset(x: 1, y: -30)
+                
+                Rectangle()
+                    .fill(selectorGradient)
+                    .frame(width: 3, height: 30)
+                
+                Triangle()
+                    .fill(selectorGradient)
+                    .frame(width: 15, height: 15)
+                    .offset(x: 1, y: 30)
+            }
             
                 
         }
