@@ -81,12 +81,10 @@ public struct HorizontalPickerView: View {
                 self.value = Int(CGFloat(minValue) + progress)
             }
             .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    offset = CGFloat(20 * (startValue - minValue))
-                    let progress = offset / 20
+                offset = CGFloat(20 * (startValue - minValue))
+                let progress = offset / 20
                     
-                    self.value = Int(CGFloat(minValue) + progress)
-                }
+                self.value = Int(CGFloat(minValue) + progress)
             }
             .padding()
             .sensoryFeedback(.selection, trigger: value)

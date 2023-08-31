@@ -16,6 +16,8 @@ struct HorizontalPickerUIKitView<Content: View>: UIViewRepresentable {
     var minValue: Int
     var startValue: Int
     
+    var isInitialOffsetSet: Bool = true
+    
     init(pickerCount: Int, offset: Binding<CGFloat>, minValue: Int, startValue: Int, @ViewBuilder content: @escaping () -> Content) {
         self.pickerCount = pickerCount
         self.content = content()
@@ -43,7 +45,6 @@ struct HorizontalPickerUIKitView<Content: View>: UIViewRepresentable {
         scrollView.bounces = false
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.delegate = context.coordinator
-        scrollView.contentOffset.x = CGFloat(20 * (startValue - minValue))
         
         return scrollView
         
@@ -86,6 +87,14 @@ struct HorizontalPickerUIKitView<Content: View>: UIViewRepresentable {
                 scrollView.setContentOffset(CGPoint(x: value * 20, y: 0), animated: true)
             }
             
+        }
+        
+        private func setInitialContentOffsetIfNeeded(_ scrollView: UIScrollView) {
+            if parent.isInitialOffsetSet {
+                let initialOffset = CGFloat(20 * (parent.startValue - parent.minValue))
+                scrollView.contentOffset.x = initialOffset
+                parent.isInitialOffsetSet = false
+            }
         }
         
     }
