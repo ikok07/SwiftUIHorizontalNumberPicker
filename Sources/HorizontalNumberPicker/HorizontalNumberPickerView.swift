@@ -55,9 +55,9 @@ public struct HorizontalPickerView: View {
         .frame(height: 50)
         .overlay {
             
-            Circle()
+            Triangle()
                 .fill(selectorGradient)
-                .frame(width: 5, height: 5)
+                .frame(width: 15, height: 15)
                 .offset(x: 1, y: -30)
         }
         .onChange(of: self.offset) { oldValue, newValue in
