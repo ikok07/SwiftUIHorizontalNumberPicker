@@ -81,6 +81,9 @@ public struct HorizontalPickerView: View {
         }
         .onAppear {
             offset = CGFloat(startValue - minValue)
+            let progress = offset / 20
+            
+            self.value = Int(CGFloat(minValue) + progress)
         }
         .sensoryFeedback(.selection, trigger: value)
     }

@@ -43,7 +43,7 @@ struct HorizontalPickerUIKitView<Content: View>: UIViewRepresentable {
         scrollView.bounces = false
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.delegate = context.coordinator
-        scrollView.contentOffset.x = CGFloat(startValue - minValue)
+        scrollView.contentOffset.x = CGFloat(20 * (startValue - minValue))
         
         return scrollView
         
