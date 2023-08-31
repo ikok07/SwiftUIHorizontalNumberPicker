@@ -58,8 +58,9 @@ public struct HorizontalPickerView: View {
             Triangle()
                 .fill(selectorGradient)
                 .frame(width: 15, height: 15)
-                .offset(x: 1, y: -30)
                 .rotationEffect(.degrees(180))
+                .offset(x: 1, y: -30)
+                
         }
         .onChange(of: self.offset) { oldValue, newValue in
             let progress = offset / 20
