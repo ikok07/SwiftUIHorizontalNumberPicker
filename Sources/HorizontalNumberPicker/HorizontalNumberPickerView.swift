@@ -54,8 +54,6 @@ public struct HorizontalPickerView: View {
         }
         .frame(height: 50)
         .overlay {
-            
-            VStack(alignment: .center) {
                 Triangle()
                     .fill(selectorGradient)
                     .frame(width: 15, height: 15)
@@ -65,13 +63,13 @@ public struct HorizontalPickerView: View {
                 Rectangle()
                     .fill(selectorGradient)
                     .frame(width: 3, height: 30)
+                    .offset(x: 1, y: 30)
                 
                 Triangle()
                     .fill(selectorGradient)
                     .frame(width: 15, height: 15)
                     .offset(x: 1, y: 30)
-            }
-            
+
                 
         }
         .onChange(of: self.offset) { oldValue, newValue in
