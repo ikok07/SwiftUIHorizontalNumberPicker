@@ -16,7 +16,7 @@ struct HorizontalPickerUIKitView<Content: View>: UIViewRepresentable {
     var minValue: Int
     var startValue: Int
     
-    var isInitialOffsetSet: Bool = true
+    @State var isInitialOffsetSet: Bool = true
     
     init(pickerCount: Int, offset: Binding<CGFloat>, minValue: Int, startValue: Int, @ViewBuilder content: @escaping () -> Content) {
         self.pickerCount = pickerCount
@@ -27,6 +27,7 @@ struct HorizontalPickerUIKitView<Content: View>: UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
+        print("test")
         let coordinator = HorizontalPickerUIKitView.Coordinator(parent: self)
         return coordinator
     }
@@ -52,7 +53,11 @@ struct HorizontalPickerUIKitView<Content: View>: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        context.coordinator.setInitialContentOffsetIfNeeded(uiView)
+        if isInitialOffsetSet {
+            let initialOffset = CGFloat(20 * (startValue - minValue))
+            uiView.contentOffset.x = initialOffset
+            isInitialOffsetSet = false
+        }
     }
     
     class Coordinator: NSObject, UIScrollViewDelegate {
@@ -80,22 +85,11 @@ struct HorizontalPickerUIKitView<Content: View>: UIViewRepresentable {
         }
         
         func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-            
             if !decelerate {
                 let offset = scrollView.contentOffset.x
                 
                 let value = (offset / 20).rounded(.toNearestOrAwayFromZero)
                 scrollView.setContentOffset(CGPoint(x: value * 20, y: 0), animated: true)
-            }
-            
-        }
-        
-        func setInitialContentOffsetIfNeeded(_ scrollView: UIScrollView) {
-            print("test")
-            if parent.isInitialOffsetSet {
-                let initialOffset = CGFloat(20 * (parent.startValue - parent.minValue))
-                scrollView.contentOffset.x = initialOffset
-                parent.isInitialOffsetSet = false
             }
         }
         
