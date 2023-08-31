@@ -27,7 +27,8 @@ struct HorizontalPickerUIKitView<Content: View>: UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        return HorizontalPickerUIKitView.Coordinator(parent: self)
+        let coordinator = HorizontalPickerUIKitView.Coordinator(parent: self)
+        return coordinator
     }
     
     public func makeUIView(context: Context) -> some UIScrollView {
@@ -51,7 +52,7 @@ struct HorizontalPickerUIKitView<Content: View>: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        
+        context.coordinator.setInitialContentOffsetIfNeeded(uiView)
     }
     
     class Coordinator: NSObject, UIScrollViewDelegate {
@@ -89,7 +90,8 @@ struct HorizontalPickerUIKitView<Content: View>: UIViewRepresentable {
             
         }
         
-        private func setInitialContentOffsetIfNeeded(_ scrollView: UIScrollView) {
+        func setInitialContentOffsetIfNeeded(_ scrollView: UIScrollView) {
+            print("test")
             if parent.isInitialOffsetSet {
                 let initialOffset = CGFloat(20 * (parent.startValue - parent.minValue))
                 scrollView.contentOffset.x = initialOffset
