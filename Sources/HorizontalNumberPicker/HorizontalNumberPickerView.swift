@@ -43,8 +43,8 @@ public struct HorizontalPickerView: View {
                 }
                 
                 Rectangle()
-                    .fill(selectorGradient)
-                    .frame(width: 3, height: 30)
+                    .fill(.gray)
+                    .frame(width: 1, height: 30)
                     .clipShape(RoundedRectangle(cornerRadius: 3))
                     .frame(width: 20)
                 
@@ -56,8 +56,8 @@ public struct HorizontalPickerView: View {
         .overlay {
             
             Rectangle()
-                .fill(.gray)
-                .frame(width: 1, height: 50)
+                .fill(selectorGradient)
+                .frame(width: 3, height: 50)
                 .offset(x: 1, y: -30)
         }
         .onChange(of: self.offset) { oldValue, newValue in
