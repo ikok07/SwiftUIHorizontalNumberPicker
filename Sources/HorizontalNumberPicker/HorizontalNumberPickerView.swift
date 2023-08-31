@@ -60,6 +60,16 @@ public struct HorizontalPickerView: View {
                 .frame(width: 15, height: 15)
                 .rotationEffect(.degrees(180))
                 .offset(x: 1, y: -30)
+            
+            Rectangle()
+                .fill(selectorGradient)
+                .frame(width: 2, height: 30)
+            
+            Triangle()
+                .fill(selectorGradient)
+                .frame(width: 15, height: 15)
+                .offset(x: 1, y: 30)
+            
                 
         }
         .onChange(of: self.offset) { oldValue, newValue in
