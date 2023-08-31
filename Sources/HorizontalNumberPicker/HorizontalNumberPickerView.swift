@@ -8,6 +8,8 @@ public struct HorizontalPickerView: View {
     @State private var offset: CGFloat = 0
     @Binding var value: Int
     
+    let selectorGradient: LinearGradient
+    
     public let minValue: Int
     public let maxValue: Int
     private var pickerCount: Int {
@@ -15,8 +17,9 @@ public struct HorizontalPickerView: View {
         return Int(doubleValue)
     }
     
-    public init(value: Binding<Int>, minValue: Int, maxValue: Int) {
+    public init(value: Binding<Int>, selectorGradient: LinearGradient = LinearGradient(colors: [.gray], startPoint: .leading, endPoint: .trailing), minValue: Int, maxValue: Int) {
         self._value = value
+        self.selectorGradient = selectorGradient
         self.minValue = minValue
         self.maxValue = maxValue
     }
@@ -40,8 +43,9 @@ public struct HorizontalPickerView: View {
                 }
                 
                 Rectangle()
-                    .fill(.gray)
-                    .frame(width: 1, height: 30)
+                    .fill(selectorGradient)
+                    .frame(width: 3, height: 30)
+                    .clipShape(RoundedRectangle(cornerRadius: 3))
                     .frame(width: 20)
                 
             }
